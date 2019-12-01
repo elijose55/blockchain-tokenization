@@ -13,6 +13,7 @@ contract TestToken {
 
  //The expected owner of adopted pet is this contract
  address expectedAdopter = address(this);
+ //console.log(address());
 
 
 // Testing the adopt() function
@@ -35,6 +36,17 @@ function testGetAdopterAddressByPetIdInArray() public {
   address[16] memory adopters = property.getAdopters();
 
   Assert.equal(adopters[expectedPetId], expectedAdopter, "Owner of the expected pet should be this contract");
+}
+
+
+// Testing the adopt() function
+function testGetTokenPrice() public {
+  uint returnedPrice = property.getTokenPrice();
+  //console.log(returnedPrice);
+
+ 	//console.log('address(this)');
+
+  Assert.equal(returnedPrice, 100000, "Price not equal.");
 }
 
 

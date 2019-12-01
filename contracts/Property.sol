@@ -44,8 +44,8 @@ contract Property{
 
         //(bool hasToken, uint256 i) = hasToken(_seller);
         //_transfer(_seller, _buyer, _amount);
-        require(balance[_seller] > 0);
-        require(balance[_seller] > _amount);
+        require(_amount > 0);
+        require(balance[_seller] >= _amount);
         
 
 
@@ -54,7 +54,33 @@ contract Property{
         balance[_seller] -= _amount;
 
 
+        return true;
+    }
 
+    function buyTokens(address _buyer, uint256 _amount) public
+        returns (bool)
+    {	
+
+        //(bool hasToken, uint256 i) = hasToken(_seller);
+        //_transfer(_seller, _buyer, _amount);
+        require(balance[ownerAddress] >= _amount);
+        ownerAddress.transfer(getTokenPrice() * _amount);
+        balance[_buyer] += _amount;
+        balance[ownerAddress] -= _amount;
+
+        return true;
+    }
+
+    function sellTokens(address payable _seller, uint256 _amount) public
+        returns (bool)
+    {	
+
+        //(bool hasToken, uint256 i) = hasToken(_seller);
+        //_transfer(_seller, _buyer, _amount);
+        require(balance[_seller] >= _amount);
+        _seller.transfer(getTokenPrice() * _amount);
+        balance[ownerAddress] += _amount;
+        balance[_seller] -= _amount;
 
         return true;
     }
