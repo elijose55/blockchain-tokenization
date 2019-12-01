@@ -1,34 +1,86 @@
 pragma solidity ^0.5.0;
 
-import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
+//import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
+//contract Property is ERC20 {
 
-contract Property is ERC20 {
+contract Property{
 	address[16] public adopters;
 
-	address[] internal stakeholders;
+	
 
 	string public name = "PropertyToken";
 	string public symbol = "RST";
 	uint8 public decimals = 3;
 	uint public INITIAL_SUPPLY = 1000;
 
-	uint public tokenSupply;
+	uint256 public tokenSupply;
 	uint public propertyValue;
 	address payable public ownerAddress;
-	
+	uint256 public tokenPrice;
 
-	constructor(address _owner, uint _value, uint _supply) public {
+	mapping(address => uint256) balance;
+	address[] internal tokenOwners;
 
-	  _mint(_owner, _supply);
-	  require(_value > 0, "property value has to be greater than 0");
-	  require(_supply > 0, "token supply has to be greater than 0");
+	constructor(address payable _owner, uint _value, uint256 _supply) public {
 
-	  propertyValue = _value;
-	  tokenSupply = _supply;
-	  ownerAddress = _owner;
+		//_mint(_owner, _supply);  //passando todos os tokens para o proprietario inicial do imovel
+		require(_value > 0, "property value has to be greater than 0");
+		require(_supply > 0, "token supply has to be greater than 0");
+
+		balance[_owner] = tokenSupply; //passando todos os tokens para o proprietario inicial do imovel
+
+		propertyValue = _value;
+		tokenSupply = _supply;
+		ownerAddress = _owner;
+
 
 
 	}
+
+
+    function transferTokens(address payable _seller, address _buyer, uint256 _amount) public
+        returns (bool)
+    {	
+
+        //(bool hasToken, uint256 i) = hasToken(_seller);
+        //_transfer(_seller, _buyer, _amount);
+        require(balance[_seller] > 0);
+        require(balance[_seller] > _amount);
+        
+
+
+        _seller.transfer(getTokenPrice() * _amount);
+        balance[_buyer] += _amount;
+        balance[_seller] -= _amount;
+
+
+
+
+        return true;
+    }
+
+
+    function getTokenPrice() public view returns (uint256){
+        return propertyValue/tokenSupply;
+    }
+
+    function hasToken(address _address)
+        public
+        view
+        returns(bool, uint256)
+    {
+        for (uint256 i = 0; i < tokenOwners.length; i += 1){
+            if (_address == tokenOwners[i]) return (true, i);
+        }
+        return (false, 0);
+    }
+
+    function addTokenOwner(address _address)
+        public
+    {
+        (bool _hasToken, ) = hasToken(_address);
+        if (!_hasToken) tokenOwners.push(_address);
+    }
 
 	// Adopting a pet
 	function adopt(uint petId) public returns (uint) {
