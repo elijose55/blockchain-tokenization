@@ -1,8 +1,5 @@
 pragma solidity ^0.5.0;
 
-//import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
-//contract Property is ERC20 {
-
 contract Property{
 	address[16] public adopters;
 
@@ -27,11 +24,13 @@ contract Property{
 		require(_value > 0, "property value has to be greater than 0");
 		require(_supply > 0, "token supply has to be greater than 0");
 
-		balance[_owner] = tokenSupply; //passando todos os tokens para o proprietario inicial do imovel
+		
 
 		propertyValue = _value;
 		tokenSupply = _supply;
 		ownerAddress = _owner;
+
+		balance[ownerAddress] = tokenSupply; //passando todos os tokens para o proprietario inicial do imovel
 
 
 
@@ -58,12 +57,15 @@ contract Property{
     }
 
     function buyTokens(address _buyer, uint256 _amount) public
+    payable
         returns (bool)
     {	
 
         //(bool hasToken, uint256 i) = hasToken(_seller);
         //_transfer(_seller, _buyer, _amount);
-        require(balance[ownerAddress] >= _amount);
+        //require(balance[ownerAddress] >= _amount);
+        //ownerAddress.transfer(getTokenPrice() * _amount);
+        uint256 x = 1;
         ownerAddress.transfer(getTokenPrice() * _amount);
         balance[_buyer] += _amount;
         balance[ownerAddress] -= _amount;
