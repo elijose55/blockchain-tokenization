@@ -42,11 +42,15 @@ function testGetAdopterAddressByPetIdInArray() public {
 // Testing the adopt() function
 function testGetTokenPrice() public {
   uint returnedPrice = property.getTokenPrice();
-  //console.log(returnedPrice);
 
- 	//console.log('address(this)');
+  Assert.equal(returnedPrice, 1, "Price not equal.");
+}
 
-  Assert.equal(returnedPrice, 100000, "Price not equal.");
+// Testing the adopt() function
+function testBuyToken() public {
+  bool returnedPrice = property.buyTokens(expectedAdopter, 1);
+
+  Assert.equal(returnedPrice, true, "Price not equal.");
 }
 
 

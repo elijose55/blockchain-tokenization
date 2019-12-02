@@ -1,0 +1,50 @@
+[
+  {
+    "id": 0,
+    "name": "Imóvel 1",
+    "picture": "images/predio.jpg",
+    "age": 1500000,
+    "breed": "Scottish Terrier",
+    "location": "Moema, SP"
+  },
+  {
+    "id": 1,
+    "name": "Imóvel 2",
+    "picture": "images/predio2.jpg",
+    "age": 1500000,
+    "breed": "Scottish Terrier",
+    "location": "Moema, SP"
+  },
+  {
+    "id": 2,
+    "name": "Imóvel 3",
+    "picture": "images/predio3.jpg",
+    "age": 1500000,
+    "breed": "French Bulldog",
+    "location": "Moema, SP"
+  },
+  {
+    "id": 3,
+    "name": "Imóvel 4",
+    "picture": "images/predio4.jpg",
+    "age": 2000000,
+    "breed": "Boxer",
+    "location": "Vila Olimpia, SP"
+  },
+  {
+    "id": 4,
+    "name": "Imóvel 5",
+    "picture": "images/predio5.jpg",
+    "age": 3000000,
+    "breed": "French Bulldog",
+    "location": "Vila Olimpia, SP"
+  },
+  {
+    "id": 5,
+    "name": "Imóvel 6",
+    "picture": "images/predio6.jpg",
+    "age": 4000000,
+    "breed": "French Bulldog",
+    "location": "Vila Olimpia, SP"
+  }
+]
