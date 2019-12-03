@@ -48,7 +48,8 @@ function testGetTokenPrice() public {
 
 // Testing the adopt() function
 function testBuyToken() public {
-  bool returnedPrice = property.buyTokens(expectedAdopter, 1);
+	address payable x = 0xF438D837b85d84d5F70cA66712947044589EB57A;
+  bool returnedPrice = property.buyTokens(x, 1);
 
   Assert.equal(returnedPrice, true, "Price not equal.");
 }
